@@ -1,0 +1,75 @@
+/* General Body */
+body {
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Navbar */
+.navbar {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+/* Icon Buttons */
+.nav-link svg {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.nav-link svg:hover {
+  transform: scale(1.2);
+  color: #ffc107;
+}
+
+/* Home Page */
+.home-section {
+  padding: 80px 20px;
+}
+
+.home-section h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.home-section p {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+/* Products */
+.card {
+  border: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.card img {
+  border-radius: 8px;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Footer */
+.footer {
+  background-color: #343a40;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  align-items: center;
+}
