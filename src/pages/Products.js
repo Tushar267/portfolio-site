@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { Container, Row, Col, Button, Card, Spinner } from "react-bootstrap";
+import { Container, Row, Col, Button, Card, Spinner, Alert } from "react-bootstrap";
 import { useSearch } from "../context/SearchContext";
 import { useCart } from "../context/CartContext";
 import { collection, query, where, orderBy, onSnapshot } from "firebase/firestore";
@@ -12,37 +12,45 @@ const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   // Fetch products from Firestore
   useEffect(() => {
-    setLoading(true);
-    const coll = collection(db, "products");
-    let q;
+  setLoading(true);
+  setError("");
+  const coll = collection(db, "products");
+  let q;
 
-    if (selectedCategory === "All") {
-      q = query(coll, orderBy("createdAt", "desc"));
-    } else {
-      q = query(
-        coll,
-        where("category", "==", selectedCategory), // match your Firestore field exactly
-        orderBy("createdAt", "desc")
-      );
-    }
+  if (selectedCategory === "All") {
+    q = query(coll); // ✅ No orderBy
+  } else {
+    q = query(coll, where("category", "==", selectedCategory)); // ✅ No orderBy
+  }
 
-    const unsub = onSnapshot(q, (snap) => {
+  const unsub = onSnapshot(
+    q,
+    (snap) => {
       const list = snap.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
-        createdAtDate: doc.data().createdAt?.toDate() || new Date(0),
+        createdAtDate: doc.data().createdAt?.toDate?.() || new Date(0),
       }));
+      console.log("Fetched products:", list);
       setProducts(list);
       setLoading(false);
-    });
+    },
+    (err) => {
+      console.error("Firestore error:", err);
+      setError("Failed to load products. Please check Firestore data.");
+      setLoading(false);
+    }
+  );
 
-    return () => unsub();
-  }, [selectedCategory]);
+  return () => unsub();
+}, [selectedCategory]);
 
-  // Filter by search (category filtering is already handled in Firestore query)
+
+  // Filter by search
   const filteredProducts = useMemo(() => {
     const term = (searchTerm || "").trim().toLowerCase();
     return products.filter((p) => {
@@ -118,6 +126,10 @@ const Products = () => {
         <div className="text-center py-5">
           <Spinner animation="border" />
         </div>
+      ) : error ? (
+        <Alert variant="danger" className="text-center">
+          {error}
+        </Alert>
       ) : filteredProducts.length === 0 ? (
         <div className="text-center py-5 text-muted">No products found.</div>
       ) : (
