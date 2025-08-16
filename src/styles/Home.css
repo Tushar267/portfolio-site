@@ -1,0 +1,55 @@
+/* src/styles/Home.css */
+.home-page {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background floating icons */
+.icon-bg {
+  position: absolute;
+  font-size: 3.5rem;
+  opacity: 0.08;
+  animation: float 8s ease-in-out infinite;
+  color: #0d6efd;
+  z-index: 0;
+}
+
+.icon-bg:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+.icon-bg:nth-child(2) { top: 25%; left: 75%; animation-delay: 1s; }
+.icon-bg:nth-child(3) { top: 70%; left: 20%; animation-delay: 2s; }
+.icon-bg:nth-child(4) { top: 50%; left: 50%; animation-delay: 3s; }
+.icon-bg:nth-child(5) { top: 80%; left: 80%; animation-delay: 4s; }
+.icon-bg:nth-child(6) { top: 35%; left: 30%; animation-delay: 5s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+/* Make sure sections have some padding but no big navbar gap */
+.section-collection {
+  position: relative;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  z-index: 1; /* so products appear above icons */
+}
+
+.home-page {
+  padding-top: 75px; /* fixes navbar overlap */
+  position: relative;
+}
+
+.icon-bg {
+  position: absolute;
+  font-size: 3rem;
+  opacity: 0.04;
+  z-index: 0;
+}
+
+.section-collection {
+  padding: 3rem 0;
+}
+
+h2 i {
+  vertical-align: middle;
+}

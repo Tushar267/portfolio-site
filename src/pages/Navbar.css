@@ -1,0 +1,35 @@
+.nav-links .nav-link {
+  padding: 8px 15px;
+  border-radius: 25px;
+  font-weight: 500;
+  color: #2c3e50 !important;
+  transition: all 0.3s ease;
+}
+
+.nav-links .nav-link:hover {
+  background-color: rgba(0, 123, 255, 0.08);
+  color: #007bff !important;
+}
+
+.nav-links .nav-link.active {
+  background-color: #007bff;
+  color: white !important;
+  font-weight: 600;
+}
+
+.search-box {
+  background: white;
+  border-radius: 30px;
+  padding: 2px 10px;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  box-shadow: none !important;
+}
+
+.search-icon {
+  color: gray;
+  margin-right: 5px;
+}
